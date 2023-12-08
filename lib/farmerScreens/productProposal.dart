@@ -71,7 +71,7 @@ class _MyWidgetState extends State<ProductProposal> {
       //Sold products
       final Map<String, dynamic> data2 = {
         "email": email,
-        "proposal_status": "Approved",
+        "proposal_status": "approved",
         "product_status": "sold"
       };
       final response2 = await http.post(
@@ -96,8 +96,8 @@ class _MyWidgetState extends State<ProductProposal> {
       //Listed products
       final Map<String, dynamic> data3 = {
         "email": email,
-        "proposal_status": "Approved",
-        "product_status": "Available"
+        "proposal_status": "approved",
+        "product_status": "available"
       };
       final response3 = await http.post(
         Uri.parse('http://localhost:5005/api/getProduct'),
@@ -121,8 +121,8 @@ class _MyWidgetState extends State<ProductProposal> {
       //rejected Products
       final Map<String, dynamic> data4 = {
         "email": email,
-        "proposal_status": "Rejected",
-        "product_status": "Available"
+        "proposal_status": "rejected",
+        "product_status": "available"
       };
       final response4 = await http.post(
         Uri.parse('http://localhost:5005/api/getProduct'),
