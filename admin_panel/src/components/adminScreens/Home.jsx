@@ -7,12 +7,17 @@ import penPro from "../../resources/img/penPro.png";
 import reqCul from "../../resources/img/reqCul.png";
 import reqPro from "../../resources/img/reqPro.png";
 import farmer from "../../resources/img/farmer.png";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
 
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Home = () => {
+  const [open, setOpen] = React.useState(true);
+
   const { isToggled } = useToggleState();
   const [chartData, setChartData] = useState({
     labels: ["Label 1", "Label 2", "Label 3"],
@@ -25,8 +30,32 @@ const Home = () => {
       },
     ],
   });
+
+  const [dashboardCount, setDashboardCount] = useState([]);
+  useEffect(() => {
+    axios
+      .post("http://localhost:5005/api/getDashboardCount", "", {
+        headers: {
+          authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.NjU0Y2Y3MWI1YzA0YWM2ODQzYTdiYjMy.tADKvBOfkw6kILJADnXdC8YtP3bhKdFwrihWKq-E2Gs",
+          "x-access-token":
+            "eyJhbGciOiJIUzI1NiJ9.NjU0Y2Y3MWI1YzA0YWM2ODQzYTdiYjMy.tADKvBOfkw6kILJADnXdC8YtP3bhKdFwrihWKq-E2Gs",
+        },
+      })
+      .then((res) => {
+        // console.log(res.data.countData);
+        setDashboardCount(res.data.countData);
+        setOpen(false);
+      });
+  }, []);
   return (
     <>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div id="main" className={isToggled ? "toggled" : ""}>
         <div className="container-fluid">
           <div className="total-circle-box">
@@ -47,8 +76,8 @@ const Home = () => {
               >
                 <defs>
                   <linearGradient id="GradientColor">
-                    <stop offset="0%" stop-color="#e91e63" />
-                    <stop offset="100%" stop-color="#673ab7" />
+                    <stop offset="0%" stopColor="#e91e63" />
+                    <stop offset="100%" stopColor="#673ab7" />
                   </linearGradient>
                 </defs>
                 <circle
@@ -56,10 +85,11 @@ const Home = () => {
                   cx="80"
                   cy="80"
                   r="70"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
-              <h3>New Farmers</h3> <h2 className="newFar">700</h2>
+              <h3>New Farmers</h3>{" "}
+              <h2 className="newFar">{dashboardCount.pendingdFarmerData}</h2>
             </div>
             <div className="cricle2-sub-box">
               <div className="skill">
@@ -78,8 +108,8 @@ const Home = () => {
               >
                 <defs>
                   <linearGradient id="GradientColor">
-                    <stop offset="0%" stop-color="#e91e63" />
-                    <stop offset="100%" stop-color="#673ab7" />
+                    <stop offset="0%" stopColor="#e91e63" />
+                    <stop offset="100%" stopColor="#673ab7" />
                   </linearGradient>
                 </defs>
                 <circle
@@ -87,10 +117,13 @@ const Home = () => {
                   cx="80"
                   cy="80"
                   r="70"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
-              <h3>Pending Cultivation</h3> <h2 className="penCul">500</h2>
+              <h3>Pending Cultivation</h3>{" "}
+              <h2 className="penCul">
+                {dashboardCount.pendingCultivationData}
+              </h2>
             </div>
             <div className="cricle3-sub-box">
               <div className="skill">
@@ -109,8 +142,8 @@ const Home = () => {
               >
                 <defs>
                   <linearGradient id="GradientColor">
-                    <stop offset="0%" stop-color="#e91e63" />
-                    <stop offset="100%" stop-color="#673ab7" />
+                    <stop offset="0%" stopColor="#e91e63" />
+                    <stop offset="100%" stopColor="#673ab7" />
                   </linearGradient>
                 </defs>
                 <circle
@@ -118,10 +151,11 @@ const Home = () => {
                   cx="80"
                   cy="80"
                   r="70"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
-              <h3>Pending Products</h3> <h2 className="penPro">1000</h2>
+              <h3>Pending Products</h3>{" "}
+              <h2 className="penPro">{dashboardCount.pendingProductData}</h2>
             </div>
             <div className="cricle4-sub-box">
               <div className="skill">
@@ -140,8 +174,8 @@ const Home = () => {
               >
                 <defs>
                   <linearGradient id="GradientColor">
-                    <stop offset="0%" stop-color="#e91e63" />
-                    <stop offset="100%" stop-color="#673ab7" />
+                    <stop offset="0%" stopColor="#e91e63" />
+                    <stop offset="100%" stopColor="#673ab7" />
                   </linearGradient>
                 </defs>
                 <circle
@@ -149,10 +183,13 @@ const Home = () => {
                   cx="80"
                   cy="80"
                   r="70"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
-              <h3>Req. Cultivation</h3> <h2 className="reqCul">200 </h2>
+              <h3>Req. Cultivation</h3>{" "}
+              <h2 className="reqCul">
+                {dashboardCount.requestedCultivationData}{" "}
+              </h2>
             </div>
 
             <div className="cricle5-sub-box">
@@ -172,8 +209,8 @@ const Home = () => {
               >
                 <defs>
                   <linearGradient id="GradientColor">
-                    <stop offset="0%" stop-color="#e91e63" />
-                    <stop offset="100%" stop-color="#673ab7" />
+                    <stop offset="0%" stopColor="#e91e63" />
+                    <stop offset="100%" stopColor="#673ab7" />
                   </linearGradient>
                 </defs>
                 <circle
@@ -181,10 +218,11 @@ const Home = () => {
                   cx="80"
                   cy="80"
                   r="70"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
-              <h3>Req. Products</h3> <h2 className="reqPro">700</h2>
+              <h3>Req. Products</h3>{" "}
+              <h2 className="reqPro">{dashboardCount.requestedProductData}</h2>
             </div>
           </div>
           <hr />

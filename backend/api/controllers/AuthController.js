@@ -2,7 +2,6 @@ const { Farmer } = require("../models/FarmerModel");
 const { User } = require("../models/UserModel");
 const { Investor } = require("../models/InvestorModel");
 const { Buyer } = require("../models/BuyerModel");
-const { CLOSING } = require("ws");
 
 //done
 exports.registerFarmer = (req, res) => {
