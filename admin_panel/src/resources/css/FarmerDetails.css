@@ -1,0 +1,75 @@
+.container {
+    max-width: 100px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.details {
+  margin-top: 20px;
+}
+
+.detail-item {
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+  display: block;
+}
+
+.box {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  width: 900px;
+}
+
+.value {
+  font-style: italic;
+  font-size: small;
+}
+
+/* Optional: Toggled styles */
+.toggled {
+  background-color: #f0f0f0;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .accept-button,
+  .reject-button {
+    margin: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 300px;
+  }
+
+  
+  .accept-button {
+    background-color: #218125; /* Green color */
+    color: #fff;
+  }
+  
+  .reject-button {
+    background-color: #c22d23; /* Red color */
+    color: #fff;
+  }
+  
+  .accept-button:hover {
+    background-color: #45a049; /* Darker green color on hover */
+  }
+  
+  .reject-button:hover {
+    background-color: #d32f2f; /* Darker red color on hover */
+  }
